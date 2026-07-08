@@ -1,11 +1,10 @@
-# modelCMT (cortical microtubule dynamics)
+# corticalsim3D (cortical microtubule dynamics)
 
-![alt text](https://github.com/HiBandan/modelCMT/blob/main/logo/logomodelCMT-3.0.png)
+![alt text](doc/assets/logo/logomodelCMT-1.0.png)
 
+This is a program for simulating cortical microtubule dynamics (CMT) on experimentally extracted microscopic images of cells
 
-This is a program for simulating cortical microtubule dynamics (CMT) on experimentally extracted microscopic images of cell 
-
-Application: 
+Application:
 
 https://www.sciencedirect.com/science/article/pii/S0960982218309242
 
@@ -15,131 +14,92 @@ https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005959
 
 Testing and contributing is very welcome, especially if you can contribute with new algorithms and features.
 
-## WINDOWS
+# Installation
 
-  ### install gcc/g++ 
-  
-  download Mingw: https://nuwen.net/mingw.html
-  
-      run mingw-xx.exe -> this will create a folder MinGw
-      
-      copy MinGw to C:\
-       
-      add environment variable: C:\MinGW or C:\MinGW\bin
+NOTE: You need a compiler that supports the C++ 14 standard as a minimum.
 
-  ### install eigen:
-  
-  download eigen: https://drive.google.com/file/d/1VFLlKJI9EaSP9VUaeV8vmPQYkqdIIJPg/view?usp=sharing
-  
-      extract "eigen-3.4.0" folder and rename it to "Eigen"
-  
-      copy "Eigen" folder to C:\Program Files 
-  
-  ### install boost:
-  
-  download boost: https://drive.google.com/file/d/1apu5_am2kJj7HvXJNPhn30k_ryi3gJDf/view?usp=sharing
+## Install the dependencies
 
-      extract "boost_1_77_0" folder and rename it to "Boost"
-  
-      copy "Boost" to C:\Program Files 
-  
-  ### get the source code
-  
-  Option 1: Download the package from the Github: https://github.com/HiBandan/modelCMT/archive/refs/heads/main.zip
+`corticalsim3D` depends on Eigen and Boost (however, the latter will be dropped soon). In addition, you will need [Meson](https://mesonbuild.com/index.html) to build the executables, as well as a fairly recent C++ compiler (GCC or Clang) supporting the C++ 14 standard. The following instructions outline the process of installing the dependencies on different platforms, as well as compiling and installing the `corticalsim3D` package itself.
 
+### Windows
 
-  Option 2: Clone from terminal: 
-  
-    git clone https://github.com/HiBandan/modelCMT.git
+Most dependencies need to be installed manually on Windows.
 
-  ### install Code::Blocks: 
-  https://code-blocks.en.uptodown.com/windows
-    
-  ### run 
-  
-    open (with Code::Blocks): modelCMT_WINDOWS.cbp
-  
-    Projects -> modelCMT.cbp -> add files
-        -> modules/cppFiles (all files except 'inline.cpp')
-        -> modules/headFiles (all files)
-        -> modules/paramFiles (all files)
-        
-    settings -> compiler -> search directories (compiler) -> add 
-  
-        -> C:\Program Files\Eigen 
-        -> C:\Program Files\Boost 
+1. GCC
 
-    project -> 
-    
-      set program’s arguments: ./modules/paramFiles/parameters_ARRAY.txt
-      build options -> search directories -> compiler -> add -> modules/cppFiles 
-      build options -> search directories -> compiler -> add -> modules/headFiles
-      build options -> linker settings -> add -> boost_system
-      build options -> linker settings -> add -> boost_filesystem
-      build options -> linker settings -> add -> libboost_filesystem
-      
-    run 
+    1. Download [MinGW](https://www.mingw-w64.org/)
+    1. Run `mingw-xx.exe` (this will create a folder called `MinGw`)
+    1. Copy the `MinGw` folder to `C:\`
+    1. Add `C:\MinGW` and `C:\MinGW\bin` to the system path
 
-## LINUX
+1. Eigen
 
-  ### install gcc/g++ 
-  
-       sudo apt update
-       sudo apt install build-essential
+    1. Download [Eigen](https://libeigen.gitlab.io/)
+    1. Extract `eigen-3.4.0` folder and rename it to `Eigen`
+    1. Copy the `Eigen` folder to `C:\Program Files`
 
-  ### install eigen:
-  
-  download eigen: https://drive.google.com/file/d/1VFLlKJI9EaSP9VUaeV8vmPQYkqdIIJPg/view?usp=sharing
-  
-      extract "eigen-3.4.0" folder and rename it to "Eigen"
-  
-      copy "Eigen" folder to /usr/local/include
-  
-  ### install boost:
-  
-  download boost: https://drive.google.com/file/d/1apu5_am2kJj7HvXJNPhn30k_ryi3gJDf/view?usp=sharing
+1. Boost
 
-      extract "boost_1_77_0" folder and rename it to "Boost"
-  
-      copy "Boost" to /usr/local/include
+    Download and install [Boost](https://www.boost.org/releases/latest/).
 
-  ### get the source code
-  
-  Option 1: Download the package from the Github: https://github.com/HiBandan/modelCMT/archive/refs/heads/main.zip
+    <span style="color: red;">NOTE</span>: The Boost dependency will be deprecated and removed soon.
 
-  Option 2: Clone from terminal: 
-  
-    git clone https://github.com/HiBandan/modelCMT.git
-    
-  ### install Code::Blocks: 
-  
-  sudo add-apt-repository ppa:damien-moore/codeblocks-stable
+1. Meson
 
-  sudo apt update
+    Use the official [Meson installer for Windows](https://github.com/mesonbuild/meson/releases). The installer also bundles the Ninja dependency, so you don't have to install that separately.
 
-  sudo apt install codeblocks codeblocks-contrib
- 
-  ### run 
+### Linux
 
-    open (with code-block): modelCMT_LINUX.cbp
-    
-    Projects -> modelCMT.cbp -> add files
-      -> modules/cppFiles (all files except 'inline.cpp')
-      -> modules/headFiles (all files)
-      -> modules/paramFiles (all files)
-  
-    settings -> compiler -> search directories (compiler) -> add 
-  
-        -> /usr/local/include/Eigen
-        -> /usr/local/include/Boost 
-       
-    project -> 
-    
-      set program’s arguments: ./modules/paramFiles/parameters_ARRAY.txt
-      build options -> search directories -> compiler -> add -> modules/cppFiles 
-      build options -> search directories -> compiler -> add -> modules/headFiles
-      build options -> linker settings -> add -> boost_system
-      build options -> linker settings -> add -> boost_filesystem
-      build options -> linker settings -> add -> libboost_filesystem
-  
-    run 
+Please use your package manager to install all the dependencies. Most Linux distributions provide packages for GCC, Meson, Ninja, Boost and Eigen.
+
+Instructions for Ubuntu (*to be confirmed, may be incomplete*):
+
+```bash
+sudo apt update && apt upgrade
+sudo apt install gcc libboost-filesystem-dev libeigen3-dev meson ninja-build cmake
+```
+
+## Compile
+
+1. First, clone the `corticalsim3D` repository:
+
+    ```bash
+    git clone https://github.com/NLeSC/corticalsim3D
+    ```
+
+    NOTE: It is recommended that you do **_not_** enter the `corticalsim3D` directory. The next steps assume an out-of-source build setup, meaning that the directory (where the package will be compiled) will be outside the source tree. This has several advantages, such as precluding the possibility of accidentally committing build artefacts to the repository.
+
+1. Configure the build with `meson`:
+
+    ```bash
+    meson setup build corticalsim3D
+    ```
+
+    This command uses the Meson build system to bootstrap everything that we need for the compilation into a directory called `build` from the sources located in the `corticalsim3D` directory.
+
+1. Enter the build directory and compile the source:
+
+    NOTE: The possible options for the `--buildtype` switch are `plain`, `debug`, `debugoptimized` and `release`. Please check the [Meson documentation page](https://mesonbuild.com/Running-Meson.html#configuring-the-build-directory) on configuring the build directory for information about the meaning of these options. We default to `release` here.
+
+    ```bash
+    meson compile -C build --buildtype release
+    ```
+
+    This will generate an executable file called `corticalsim3d` in the current directory (`build`).
+
+    NOTE: If you are using a very old Meson version (e.g., `<0.54.0`), you need to use `ninja` instead of `meson`, with a slightly different syntax:
+
+    ```bash
+    ninja -C build corticalsim3d
+    ```
+
+    Here, `corticalsim3d` is lowercase as it refers to the target to be built, not the `corticalsim3D` directory.
+
+## Run
+
+Run the `corticalsim3d` executable with the `corticalsim3D/config/parameters_ARRAY.txt` parameter file as the first argument:
+
+```bash
+./build/corticalsim3d ./corticalsim3D/config/parameters_ARRAY.txt
+```
