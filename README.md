@@ -65,25 +65,27 @@ sudo apt install gcc libboost-filesystem-dev libeigen3-dev meson ninja-build cma
 1. First, clone the `corticalsim3D` repository:
 
     ```bash
-    git clone https://github.com/NLeSC/corticalsim3D
+    git clone https://github.com/corticalsim/corticalsim3D
     ```
 
     NOTE: It is recommended that you do **_not_** enter the `corticalsim3D` directory. The next steps assume an out-of-source build setup, meaning that the directory (where the package will be compiled) will be outside the source tree. This has several advantages, such as precluding the possibility of accidentally committing build artefacts to the repository.
 
-1. Configure the build with `meson`:
+1. Configure the build:
+
+    NOTE: The possible options for the `--buildtype` switch below are `plain`, `debug`, `debugoptimized` and `release`. Please check the [Meson documentation page](https://mesonbuild.com/Running-Meson.html#configuring-the-build-directory) on configuring the build directory for information about the meaning of these options. We default to `release` here.
 
     ```bash
-    meson setup build corticalsim3D
+    meson setup build corticalsim3D --buildtype release
     ```
 
     This command uses the Meson build system to bootstrap everything that we need for the compilation into a directory called `build` from the sources located in the `corticalsim3D` directory.
 
-1. Enter the build directory and compile the source:
+1. Compile the source:
 
-    NOTE: The possible options for the `--buildtype` switch are `plain`, `debug`, `debugoptimized` and `release`. Please check the [Meson documentation page](https://mesonbuild.com/Running-Meson.html#configuring-the-build-directory) on configuring the build directory for information about the meaning of these options. We default to `release` here.
+    Now we can run `meson` to compile the source. Do **_not_** enter the build directory; instead, specify it with the `-C` switch:
 
     ```bash
-    meson compile -C build --buildtype release
+    meson compile -C build
     ```
 
     This will generate an executable file called `corticalsim3d` in the current directory (`build`).
