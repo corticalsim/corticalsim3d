@@ -76,7 +76,8 @@ Alternatively, you can run all the setup and compilation steps manually by follo
 1. From the root directory, first install the dependency wraps:
 
 ```bash
-    meson wrap install eigen 5.0.1-1
+meson wrap install eigen 5.0.1-1
+meson wrap install gtest 1.17.0-04
 ```
 
 1. Run the setup to configure the build:
