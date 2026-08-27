@@ -43,8 +43,6 @@
 #include <map>
 #include <queue>
 #include <boost/pool/pool_alloc.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/filesystem.hpp>
 #include <string>
 #include <cstring>
 #include <cmath>
