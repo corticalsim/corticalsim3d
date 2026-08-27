@@ -40,6 +40,7 @@ mkdir -p $BUILD_DIR
 # Install dependency wraps
 echo ">>> Installing dependencies..."
 meson wrap install eigen 5.0.1-1
+meson wrap install gtest 1.17.0-4
 echo ">>> Installing dependencies: done!"
 
 # Configure
